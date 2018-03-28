@@ -23,6 +23,12 @@ class MoviesTableViewController: UITableViewController {
         guard let jsonURL = Bundle.main.url(forResource: "movies.json", withExtension: nil),
             let data = try? Data(contentsOf: jsonURL) else {return}
         
+        do {
+        movies = try JSONDecoder().decode([Movie].self, from: data)
+            
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     override func didReceiveMemoryWarning() {
